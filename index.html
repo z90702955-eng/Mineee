@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riri & Shai | Our Universe</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #080615;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+section {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero {
+  background: radial-gradient(
+    ellipse at center,
+    #30143f 0%,
+    #130c29 40%,
+    #080615 80%
+  );
+}
+
+.small {
+  letter-spacing: 6px;
+  font-size: 11px;
+  color: #e6a6df;
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(65px, 13vw, 120px);
+  font-weight: 400;
+  color: #ffd5f3;
+  text-shadow: 0 0 30px #f17adf;
+}
+
+h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(45px, 8vw, 75px);
+  color: #ffc9ed;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.subtitle {
+  color: #d9c6e8;
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+.heart {
+  font-size: 65px;
+  margin: 30px;
+  animation: heartbeat 1.5s infinite;
+  filter: drop-shadow(0 0 20px #ff66c4);
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.btn {
+  margin-top: 35px;
+  padding: 15px 35px;
+  border: 1px solid #f6a7e4;
+  background: transparent;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 2px;
+  transition: .3s;
+}
+
+.btn:hover {
+  background: #e66bbd;
+  box-shadow: 0 0 30px #e66bbd;
+}
+
+.glass {
+  max-width: 700px;
+  width: 100%;
+  padding: 40px 30px;
+  border: 1px solid #d88acb55;
+  border-radius: 25px;
+  background: #ffffff09;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 50px #c64eaa18;
+}
+
+p {
+  color: #e9d8ef;
+  line-height: 2;
+  font-size: 15px;
+}
+
+.planet {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  margin: 35px;
+  background:
+    radial-gradient(circle at 30% 30%,
+    #ffe2ff, #df79d8 20%,
+    #8135a5 50%, #281047 80%);
+  box-shadow:
+    0 0 40px #d96cfa,
+    0 0 100px #a23bdd66,
+    inset -20px -15px 35px #160726;
+  animation: float 5s ease-in-out infinite;
+  position: relative;
+}
+
+.planet::after {
+  content: "R ♡ S";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Great Vibes';
+  font-size: 45px;
+  color: white;
+}
+
+@keyframes float {
+  50% { transform: translateY(-18px) rotate(5deg); }
+}
+
+.promise {
+  padding: 18px;
+  margin: 15px 0;
+  border-left: 2px solid #ed91d9;
+  text-align: left;
+  background: #ffffff08;
+  border-radius: 8px;
+  color: #f8d9ef;
+}
+
+.star {
+  display: inline-block;
+  font-size: 30px;
+  padding: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.star:hover {
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 15px pink);
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 35px;
+  text-align: center;
+  color: #b995c6;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+#secret {
+  display: none;
+  margin-top: 25px;
+  color: #ffd2ed;
+  line-height: 2;
+  animation: fade 2s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<section class="hero">
+  <div class="small">A UNIVERSE CREATED FOR TWO SOULS</div>
+
+  <h1>Riri & Shai</h1>
+
+  <div class="heart">♡</div>
+
+  <p class="subtitle">
+    TWO HEARTS. ONE UNIVERSE. INFINITE LOVE.
+  </p>
+
+  <button class="btn"
+    onclick="document.getElementById('world').scrollIntoView({behavior:'smooth'})">
+    ENTER OUR WORLD ✧
+  </button>
+</section>
+
+<section id="world">
+  <div class="small">SOMEWHERE BETWEEN THE STARS</div>
+
+  <h2>Our Little Universe</h2>
+
+  <div class="planet"></div>
+
+  <div class="glass">
+    <p>
+      Out of billions of galaxies, countless stars,
+      and infinite possibilities, somehow my universe
+      led me to you.
+
+      <br><br>
+
+      And now, Shai, I don't need to search for magic
+      anywhere else. I found it in you.
+
+      <br><br>
+
+      You are my favorite place in this entire universe.
+      My home. My peace. My everything.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="small">A LETTER FROM MY HEART</div>
+
+  <h2>To My Princess ♡</h2>
+
+  <div class="glass">
+    <p>
+      My beautiful Shai,
+
+      <br><br>
+
+      Happy three months, my love.
+
+      I know I'm not always the best at expressing
+      what's inside my heart, but I hope you know
+      how much your existence means to me.
+
+      <br><br>
+
+      I'm so grateful that you exist. I'm grateful
+      that out of everyone in this world, I get to
+      call you mine.
+
+      <br><br>
+
+      My world would never feel complete without you.
+      I cannot imagine a life where I don't get to
+      love you, annoy you, laugh with you, and call
+      you my princess.
+
+      <br><br>
+
+      I promise to stand beside you through every
+      hardship. And when life gets difficult, I want
+      to stand in front of you, not because you
+      aren't strong enough to face your problems,
+      but because I want to be your safe place.
+
+      <br><br>
+
+      I'm sorry for the times I've been a pain in
+      the neck, for the moments I've been too much,
+      and for the times I struggle to express myself.
+
+      Thank you for staying. Thank you for choosing
+      me. Thank you for being you.
+
+      <br><br>
+
+      I love you more than words could ever explain.
+      More than this little website could ever show.
+      More than anything in this world.
+
+      <br><br>
+
+      Forever your Riri. ♡
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="small">MY PROMISES TO YOU</div>
+
+  <h2>Things I Promise, My Queen</h2>
+
+  <div class="glass">
+
+    <div class="promise">
+      ♡ I promise to choose you, even on difficult days.
+    </div>
+
+    <div class="promise">
+      ♡ I promise to listen when the world feels too loud.
+    </div>
+
+    <div class="promise">
+      ♡ I promise to protect your peace, not control your world.
+    </div>
+
+    <div class="promise">
+      ♡ I promise to stand beside you through every storm.
+    </div>
+
+    <div class="promise">
+      ♡ I promise to keep making memories with you.
+    </div>
+
+    <div class="promise">
+      ♡ I promise to never stop reminding you how loved you are.
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="small">A LITTLE SECRET FROM RIRI</div>
+
+  <h2>Touch a Star, My Love ✨</h2>
+
+  <p>Every star has a little message for you.</p>
+
+  <div style="margin:35px">
+    <span class="star" onclick="message(0)">✦</span>
+    <span class="star" onclick="message(1)">✧</span>
+    <span class="star" onclick="message(2)">✦</span>
+    <span class="star" onclick="message(3)">✧</span>
+    <span class="star" onclick="message(4)">✦</span>
+  </div>
+
+  <div class="glass">
+    <p id="secret">Your Riri loves you endlessly. ♡</p>
+  </div>
+</section>
+
+<section>
+  <div class="small">IN EVERY GALAXY, IN EVERY LIFETIME</div>
+
+  <h2>You Are My Forever</h2>
+
+  <div class="heart">♥</div>
+
+  <div class="glass">
+    <p>
+      If I could choose one person in every universe,
+      in every timeline, and in every lifetime...
+
+      <br><br>
+
+      I would still choose you.
+
+      <br><br>
+
+      Not just for three months. Not just for a
+      beautiful moment.
+
+      I want all the ordinary days, the difficult
+      days, the silly days, and every little moment
+      in between.
+
+      <br><br>
+
+      Happy 3 Months, My Shai.
+
+      <br><br>
+
+      <span style="color:#ffb5e8;font-size:23px">
+        You are my universe. ♡
+      </span>
+
+      <br><br>
+
+      — Your Riri
+    </p>
+  </div>
+</section>
+
+<footer>
+  MADE WITH INFINITE LOVE ♡
+  <br><br>
+  RIRI × SHAI · OUR UNIVERSE · 2026
+</footer>
+
+<script>
+
+// STARRY SKY
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  stars = Array.from({length:150}, () => ({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.8,
+    a:Math.random()
+  }));
+}
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  stars.forEach(s => {
+    s.a += (Math.random()-.5)*.04;
+    s.a = Math.max(.2,Math.min(1,s.a));
+
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(255,220,255,${s.a})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener("resize",resize);
+resize();
+draw();
+
+// SECRET STAR MESSAGES
+const messages = [
+  "Shai, you are my favorite notification. ♡",
+  "If home were a person, it would be you.",
+  "Even on my worst days, loving you is easy.",
+  "Thank you for existing, my beautiful girl.",
+  "One universe, two hearts, and an endless love. ♡"
+];
+
+function message(i) {
+  const box = document.getElementById("secret");
+  box.style.display = "block";
+  box.innerText = messages[i];
+}
+
+</script>
+
+</body>
+</html>
